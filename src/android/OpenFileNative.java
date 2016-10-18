@@ -2,7 +2,7 @@
 package org.apache.cordova.openfilenative;
 
 import android.Manifest;
-import android.app.ProgressDialog;
+//import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -87,7 +87,7 @@ public class OpenFileNative extends CordovaPlugin {
     private class DownloadAndOpenTask extends AsyncTask<URI, Integer, Boolean> {
 
         // declare the dialog as a member field of your activity
-        private ProgressDialog mProgressDialog;
+//        private ProgressDialog mProgressDialog;
         private File targetFile;
         private boolean canceled = false;
 
@@ -95,6 +95,7 @@ public class OpenFileNative extends CordovaPlugin {
         protected void onPreExecute() {
             super.onPreExecute();
 
+/*
             // instantiate it within the onCreate method
             mProgressDialog = new ProgressDialog(context);
             mProgressDialog.setMessage(progressTitle);
@@ -108,6 +109,7 @@ public class OpenFileNative extends CordovaPlugin {
                 }
             });
             mProgressDialog.show();
+*/
         }
 
         @Override
@@ -125,6 +127,11 @@ public class OpenFileNative extends CordovaPlugin {
             } else {
                 targetFileName = uri.toString();
             }
+
+            //keeping the extension only
+            sep = targetFileName.lastIndexOf(".");
+            if (sep > 0)
+                targetFileName = "temporary" + targetFileName.substring(sep);
 
             try {
                 if (!uri.isAbsolute()){
@@ -206,16 +213,20 @@ public class OpenFileNative extends CordovaPlugin {
         @Override
         protected void onProgressUpdate(Integer... progress) {
             super.onProgressUpdate(progress);
+/*
             mProgressDialog.setIndeterminate(false);
             mProgressDialog.setMax(100);
             mProgressDialog.setProgress(progress[0]);
+*/
         }
 
         @Override
         protected void onPostExecute(Boolean result) {
+/*
             if (mProgressDialog != null) {
                 mProgressDialog.dismiss();
             }
+*/
             if (result) {
                 openFile(targetFile.getAbsolutePath());
             }

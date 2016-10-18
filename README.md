@@ -1,6 +1,8 @@
 # OpenFileNative
 
-fork from https://github.com/markeeftb/FileOpener
+fork from https://github.com/carrer/cordova-plugin-openfilenative
+
+I've just commented out the "Progress Dialog" window that would pop up during request and modified the name of the cached file to protect/hide the original filename.
 
 @author Andreas Scherer
 
